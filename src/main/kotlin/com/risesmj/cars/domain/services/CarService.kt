@@ -14,7 +14,7 @@ class CarService {
     lateinit var repository: CarRepository
 
     fun getCars(): MutableList<CarDTO> {
-        return repository.findAll().stream().map { CarDTO.fromCar(it) }.toList()
+        return repository.findAll().stream().map { CarDTO.fromCar(it) }.toList().toMutableList()
     }
 
     fun getCarById(id: Long): CarDTO{
@@ -22,7 +22,7 @@ class CarService {
     }
 
     fun getCarByType(type: String): MutableList<CarDTO>{
-        return repository.findByType(type).stream().map { CarDTO.fromCar(it) }.toList()
+        return repository.findByType(type).stream().map { CarDTO.fromCar(it) }.toList().toMutableList()
     }
 
     fun insert(car: Car): CarDTO{
