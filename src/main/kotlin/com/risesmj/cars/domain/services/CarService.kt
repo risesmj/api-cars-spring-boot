@@ -7,14 +7,15 @@ import com.risesmj.cars.domain.repositories.CarRepository
 import org.modelmapper.internal.util.Assert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import kotlin.streams.toList
 
 @Service
 class CarService {
     @Autowired(required = true)
     lateinit var repository: CarRepository
 
-    fun getCars(): MutableList<CarDTO> {
-        return repository.findAll().stream().map { CarDTO.fromCar(it) }.toList().toMutableList()
+    fun getCars(): List<CarDTO> {
+        return repository.findAll().stream().map { CarDTO.fromCar(it) }.toList()
     }
 
     fun getCarById(id: Long): CarDTO{

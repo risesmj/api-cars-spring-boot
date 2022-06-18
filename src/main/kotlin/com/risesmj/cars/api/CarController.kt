@@ -37,7 +37,7 @@ class CarController {
     private lateinit var service: CarService
 
     @GetMapping
-    fun get(): ResponseEntity<MutableList<CarDTO>> {
+    fun get(): ResponseEntity<List<CarDTO>> {
         return ResponseEntity.ok(service.getCars())
     }
 
