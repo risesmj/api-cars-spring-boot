@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test
 import org.modelmapper.internal.util.Assert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.domain.PageRequest
 
 @SpringBootTest
 class CarsApplicationTests {
@@ -56,7 +57,7 @@ class CarsApplicationTests {
 
 	@Test
 	fun getCars(){
-		var list = service.getCars()
+		var list = service.getCars(PageRequest.of(0,10))
 
 		Assert.notNull(list)
 		Assert.isTrue(list.isNotEmpty())

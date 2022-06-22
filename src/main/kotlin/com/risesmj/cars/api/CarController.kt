@@ -4,6 +4,7 @@ import com.risesmj.cars.domain.dto.CarDTO
 import com.risesmj.cars.domain.entities.Car
 import com.risesmj.cars.domain.services.CarService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
@@ -37,8 +39,11 @@ class CarController {
     private lateinit var service: CarService
 
     @GetMapping
-    fun get(): ResponseEntity<List<CarDTO>> {
-        return ResponseEntity.ok(service.getCars())
+    fun get(
+        @RequestParam page: Int = 0,
+        @RequestParam size: Int = 10,
+    ): ResponseEntity<List<CarDTO>> {
+        return ResponseEntity.ok(service.getCars(PageRequest.of(page,size)))
     }
 
     @GetMapping("/{id}")

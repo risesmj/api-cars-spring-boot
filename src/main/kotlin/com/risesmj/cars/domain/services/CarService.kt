@@ -6,6 +6,7 @@ import com.risesmj.cars.domain.entities.Car
 import com.risesmj.cars.domain.repositories.CarRepository
 import org.modelmapper.internal.util.Assert
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import kotlin.streams.toList
 
@@ -14,8 +15,8 @@ class CarService {
     @Autowired(required = true)
     lateinit var repository: CarRepository
 
-    fun getCars(): List<CarDTO> {
-        return repository.findAll().stream().map { CarDTO.fromCar(it) }.toList()
+    fun getCars(pageable: Pageable): List<CarDTO> {
+        return repository.findAll(pageable).stream().map { CarDTO.fromCar(it) }.toList()
     }
 
     fun getCarById(id: Long): CarDTO{
