@@ -40,8 +40,8 @@ class CarController {
 
     @GetMapping
     fun get(
-        @RequestParam page: Int = 0,
-        @RequestParam size: Int = 10,
+        @RequestParam(value = "page", defaultValue = "0") page: Int,
+        @RequestParam(value = "size", defaultValue = "10") size: Int,
     ): ResponseEntity<List<CarDTO>> {
         return ResponseEntity.ok(service.getCars(PageRequest.of(page,size)))
     }
